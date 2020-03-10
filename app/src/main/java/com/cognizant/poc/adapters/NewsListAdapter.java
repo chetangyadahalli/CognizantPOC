@@ -70,7 +70,8 @@ public class NewsListAdapter extends ArrayAdapter<NewsArticle>{
             Picasso.get().load(dataModel.getUrlToImage())
                     .error(R.drawable.no_news_icon)
                     .resize(250, 250)
-                    .centerCrop().into(viewHolder.ivNews);
+                    .centerCrop()
+                    .into(viewHolder.ivNews);
         }
         // Return the completed view to render on screen
         return convertView;
