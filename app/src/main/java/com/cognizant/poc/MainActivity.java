@@ -16,7 +16,6 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.cognizant.poc.adapters.NewsListAdapter;
 import com.cognizant.poc.model.NewsArticle;
 import com.cognizant.poc.viewmodels.NewsViewModel;
-
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.ObjectInputStream;
@@ -26,12 +25,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import com.google.gson.Gson;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import static android.preference.PreferenceManager.getDefaultSharedPreferences;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -66,7 +63,6 @@ public class MainActivity extends AppCompatActivity {
         articlesList = findViewById(R.id.lstArticles);
         actionBarSetup("");
         newsViewModel = ViewModelProviders.of(MainActivity.this).get(NewsViewModel.class);
-       // newsViewModel.init();
         pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -86,9 +82,7 @@ public class MainActivity extends AppCompatActivity {
                             editor.putString("title", Title);
                             editor.commit();
 
-                            if (Title.equalsIgnoreCase("")) {
-                                //No title supplied
-                            } else {
+                            if (!Title.equalsIgnoreCase("")) {
                                 actionBarSetup(Title);
                             }
                             for (int i = 0; i < newsArticles.size(); i++) {
@@ -124,9 +118,7 @@ public class MainActivity extends AppCompatActivity {
                 editor.putString("title",Title);
                 editor.commit();
 
-                if(Title.equalsIgnoreCase("")) {
-                    //No title supplied
-                } else {
+                if(!Title.equalsIgnoreCase("")) {
                     actionBarSetup(Title);
                 }
                 for (int i=0;i<newsArticles.size();i++) {
@@ -176,7 +168,6 @@ public class MainActivity extends AppCompatActivity {
         if (newsAdapter == null) {
             newsAdapter = new NewsListAdapter(articleArrayList,MainActivity.this);
             articlesList.setAdapter(newsAdapter);
-           // articlesList.setNestedScrollingEnabled(true);
         } else {
             newsAdapter.notifyDataSetChanged();
         }
